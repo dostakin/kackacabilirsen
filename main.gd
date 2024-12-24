@@ -1,17 +1,15 @@
 extends Node
 
-const LEVEL_SCORE_THRESHOLD = 5
+const LEVEL_SCORE_THRESHOLD = 20
 
 @export var mob_scene: PackedScene
 var score
-var prev_level
+var prev_level = -2
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$MobTimer.wait_time = 2
-	prev_level = -2
-	print($HUD/Message.modulate)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,6 +29,7 @@ func new_game():
 	get_tree().call_group("mobs", "queue_free")
 	score = 0
 	prev_level = -2
+	$MobTimer.wait_time = 2
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	$HUD.update_score(score)
